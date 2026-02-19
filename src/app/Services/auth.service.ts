@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private baseUrl = "https://ajay-movies-backend.onrender.com/api/auth";
-  // private baseUrl = 'http://localhost:8080/api/auth';
+  //private baseUrl = "https://ajay-movies-backend.onrender.com/api/auth";
+   private baseUrl = 'http://localhost:8080/api/auth';
   private tokenKey = 'token';
 
   constructor(private http: HttpClient) {}

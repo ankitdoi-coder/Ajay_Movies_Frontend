@@ -75,7 +75,9 @@
                         <p *ngIf="screenshot?.screenshotPath"><img decoding="async" [src]="'http://localhost:8080' + screenshot.screenshotPath" alt="Movie Screenshot"></p>
                     </div> -->
                     <img *ngFor="let screenshot of movie.screenshots"
-                        [src]="'https://ajay-movies-backend.onrender.com' + screenshot.screenshotPath" alt="Movie Screenshot" />
+                        [src]="'http://localhost:8080' + screenshot.screenshotPath" alt="Movie Screenshot" />
+                    <!-- <img *ngFor="let screenshot of movie.screenshots"
+                        [src]="'https://ajay-movies-backend.onrender.com' + screenshot.screenshotPath" alt="Movie Screenshot" /> -->
                 </div>
                 <ng-template #noScreenshots>
                     <p>No screenshots available</p>
@@ -175,10 +177,18 @@
                         itemtype="https://schema.org/CreativeWork">
                         <div class="post type-post status-publish format-standard has-post-thumbnail hentry">
                             <a class="ct-media-container" [routerLink]="['/download', relatedMovie.id]"
-                                [attr.aria-label]="relatedMovie.title"><img width="200" height="300"
-                                    [src]="'https://ajay-movies-backend.onrender.com' + relatedMovie.posterPath"
-                                    class="attachment-medium size-medium wp-post-image" [alt]="relatedMovie.title"
-                                    loading="lazy" decoding="async" itemprop="image" style="aspect-ratio: 9/13;"></a>
+                                [attr.aria-label]="relatedMovie.title">
+                                <img width="200" height="300" [src]="'http://localhost:8080' 
+                                    + relatedMovie.posterPath" class="attachment-medium size-medium wp-post-image"
+                                    [alt]="relatedMovie.title" loading="lazy" decoding="async" itemprop="image"
+                                    style="aspect-ratio: 9/13;">
+                                <!-- <img width="200" height="300" [src]="'https://ajay-movies-backend.onrender.com' 
+                                    + relatedMovie.posterPath" class="attachment-medium size-medium wp-post-image"
+                                    [alt]="relatedMovie.title" loading="lazy" decoding="async" itemprop="image"
+                                    style="aspect-ratio: 9/13;"> -->
+                            </a>
+
+
                             <h2 class="related-entry-title"><a [routerLink]="['/download', relatedMovie.id]"
                                     rel="bookmark">{{relatedMovie.title}}</a></h2>
                         </div>

@@ -30,4 +30,6 @@ export interface Moviez {
   downloadLink480?: string;
   downloadLink720?: string;
   downloadLink1080?: string;
+
+  category?: string;
 }

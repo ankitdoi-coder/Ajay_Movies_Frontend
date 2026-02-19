@@ -89,6 +89,13 @@
                <label for="downloadLink1080">Download Link 1080p</label>
                <input type="text" id="downloadLink1080" placeholder="Enter the 1080p download link" formControlName="downloadLink1080">
             </div>
+            <div>
+               <label for="Category">Select Category</label>
+               <select formControlName="category">
+                  <option [ngValue]="null">Select an Item </option>
+                  <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+               </select>
+            </div>
 
             <!-- Poster Image -->
             <div>
