@@ -3,6 +3,7 @@ import { Movie } from '../Services/movie';
 import { Moviez } from '../Models/Moviez';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class Home implements OnInit {
   movies: Moviez[] = [];
 
   movieId:number | null=null;
+  apiUrl = environment.apiUrl;
 
 
   constructor(private movieService: Movie, private router: Router) {}

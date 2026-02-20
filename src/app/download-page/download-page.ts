@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Movie } from '../Services/movie';
 import { Moviez } from '../Models/Moviez';
 import { CommonModule } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-download-page',
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class DownloadPage {
 
   constructor(private route: ActivatedRoute, private movieService: Movie) { }
+  apiUrl = environment.apiUrl;
 
   movie: Moviez = {};
   relatedMovies: Moviez[] = [];
