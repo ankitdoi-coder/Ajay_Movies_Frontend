@@ -20,7 +20,7 @@ export class Home implements OnInit {
   apiUrl = environment.apiUrl;
 
 
-  constructor(private movieService: Movie, private router: Router) {}
+  constructor(public movieService: Movie, private router: Router) {}
 
   //loads movies on page Load
   ngOnInit() {

@@ -7,7 +7,7 @@
                 (click)="movie.id && openMovie(movie.id)">
                     <div class="ct-media-container boundless-image">
                         <img class="attachment-medium_large size-medium_large wp-post-image" width="300" height="450"
-                            [src]="apiUrl + movie.posterPath" alt="" style="aspect-ratio: 9/14;">
+                            [src]="movieService.getMovieImageUrl(movie.posterPath)" alt="" style="aspect-ratio: 9/14;">
                         <!-- <img class="attachment-medium_large size-medium_large wp-post-image" width="300" height="450"
                             [src]="'https://ajay-movies-backend.onrender.com' + movie.posterPath" alt="" style="aspect-ratio: 9/14;"> -->
                     </div>

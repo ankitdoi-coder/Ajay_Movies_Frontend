@@ -15,18 +15,22 @@ export class Movie {
   constructor(private http: HttpClient) { }
 
   saveMovie(movie: FormData): Observable<Moviez> {
-    return this.http.post<Moviez>(`${this.baseUrl}/save-movie`, movie)
+    return this.http.post<Moviez>(`${this.baseUrl}/save-movie`, movie);
   }
 
   getAllMovies(): Observable<Moviez[]> {
-    return this.http.get<Moviez[]>(`${this.baseUrl}/get-all-movies`)
+    return this.http.get<Moviez[]>(`${this.baseUrl}/get-all-movies`);
   }
 
   getMovieById(id: any): Observable<Moviez> {
-    return this.http.get<Moviez>(`${this.baseUrl}/get-by-id/${id}`)
+    return this.http.get<Moviez>(`${this.baseUrl}/get-by-id/${id}`);
   }
 
   getCategories() {
     return this.http.get<any>(`${this.baseUrl}/categories`);
+  }
+
+  getMovieImageUrl(filename: string | undefined): string {
+    return filename ? `${environment.apiUrl}${filename}` : '';
   }
 }
