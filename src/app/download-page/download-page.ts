@@ -1,38 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Movie } from '../Services/movie';
-import { Moviez } from '../Models/Moviez';
-import { CommonModule } from '@angular/common';
+import { Movie } from '../Services/movie';// Ensure correct path
 import { environment } from '../../environments/environment';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-download-page',
+  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './download-page.html',
-  styleUrl: './download-page.scss',
+  styleUrls: ['./download-page.scss']
 })
-export class DownloadPage {
-
-  constructor(private route: ActivatedRoute, private movieService: Movie) { }
+export class DownloadPageComponent implements OnInit {
+  movie: any = {};
+  relatedMovies: any[] = [];
   apiUrl = environment.apiUrl;
 
-  movie: Moviez = {};
-  relatedMovies: Moviez[] = [];
+  constructor(private route: ActivatedRoute, private movieService: Movie) {}
 
   ngOnInit() {
-    const movieId = Number(this.route.snapshot.paramMap.get('id'));
-    this.movieService.getMovieById(movieId).subscribe({
-      next:(data:Moviez)=>{
-        this.movie=data;
-      },
-      error:(err: any)=>{
-        console.error("Failed to load Movie" ,err);
+    // Subscribe to paramMap to detect changes in the URL ID
+    this.route.paramMap.subscribe(params => {
+      const id = Number(params.get('id'));
+      if (id) {
+        this.getMovieById(id);
       }
     });
 
+    this.getAllMovies();
+  }
+
+  getMovieById(id: number) {
+    this.movieService.getMovieById(id).subscribe({
+      next: (data:any) => {
+        this.movie = data;
+        // Scroll to the top of the page when a new movie loads
+        window.scrollTo(0, 0);
+      },
+      error: (err:any) => {
+        console.error("Failed to load Movie", err);
+      }
+    });
+  }
+
+  getAllMovies() {
     this.movieService.getAllMovies().subscribe({
-      next: (data) => this.relatedMovies = data.slice(0, 4),
-      error: (err) => console.error(err)
+      next: (data:any) => {
+        this.relatedMovies = data.slice(0, 4);
+      },
+      error: (err:any) => {
+        console.error(err);
+      }
     });
   }
 }

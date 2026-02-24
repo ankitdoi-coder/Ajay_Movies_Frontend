@@ -98,7 +98,7 @@ export class Admin implements OnInit {
     };
 
 
-    //new form Data For Sending it 
+    //new form Data For Sending movie object + poster + Screenshots 
     const formData = new FormData();
 
     // 2. Append the JSON object as a Blob with type 'application/json'

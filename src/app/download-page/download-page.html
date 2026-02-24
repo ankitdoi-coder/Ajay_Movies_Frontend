@@ -74,8 +74,8 @@
                     <!-- <div *ngFor="let screenshot of movie.screenshots">
                         <p *ngIf="screenshot?.screenshotPath"><img decoding="async" [src]="'http://localhost:8080' + screenshot.screenshotPath" alt="Movie Screenshot"></p>
                     </div> -->
-                    <img *ngFor="let screenshot of movie.screenshots"
-                        [src]="apiUrl + screenshot.screenshotPath" alt="Movie Screenshot" />
+                    <img *ngFor="let screenshot of movie.screenshots" [src]="apiUrl + screenshot.screenshotPath"
+                        alt="Movie Screenshot" />
                     <!-- <img *ngFor="let screenshot of movie.screenshots"
                         [src]="'https://ajay-movies-backend.onrender.com' + screenshot.screenshotPath" alt="Movie Screenshot" /> -->
                 </div>

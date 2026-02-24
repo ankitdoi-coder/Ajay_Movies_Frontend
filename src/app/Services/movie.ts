@@ -33,4 +33,8 @@ export class Movie {
   getMovieImageUrl(filename: string | undefined): string {
     return filename ? `${environment.apiUrl}${filename}` : '';
   }
+
+  searchMovie(queryParams: any): Observable<Moviez[]> {
+    return this.http.get<Moviez[]>(`${this.baseUrl}/search`, { params: queryParams });
+  }
 }
