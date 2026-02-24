@@ -34,7 +34,14 @@ export class Movie {
     return filename ? `${environment.apiUrl}${filename}` : '';
   }
 
-  searchMovie(queryParams: any): Observable<Moviez[]> {
-    return this.http.get<Moviez[]>(`${this.baseUrl}/search`, { params: queryParams });
+  searchMovie(title?: string, category?: string): Observable<Moviez[]> {
+    let params: any = {};
+    if (title !== undefined && title !== null) {
+      params.title = title;
+    }
+    if (category !== undefined && category !== null) {
+      params.category = category;
+    }
+    return this.http.get<Moviez[]>(`${this.baseUrl}/search`, { params });
   }
 }

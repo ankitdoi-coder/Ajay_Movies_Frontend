@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { Route, Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Movie } from './Services/movie';
 import { Moviez } from './Models/Moviez';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule, CommonModule],
+  imports: [RouterOutlet, RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -23,7 +23,7 @@ export class App {
   constructor(
     private fb: FormBuilder,
     public movieService: Movie,
-    private router:Router
+    private router: Router
   ) {
     this.searchFormGroup = this.fb.group({
       search: ['']
@@ -51,6 +51,13 @@ export class App {
     this.menuOpen = false; // Closes mobile menu if open
     this.router.navigate(['/home']);
   }
+
+  goToContactUs() {
+    this.moviesList = null;
+    this.searchFormGroup.reset();
+    this.activeFooterLink = 'contactus';
+    this.menuOpen = false;
+  }
   //get Movie data on Click Movie Card and route to the download page
   openMovie(movieId: number) {
     this.router.navigate(['/download', movieId]);
@@ -58,8 +65,20 @@ export class App {
 
   //CATEGORY search 
   searchByCategory(category: string) {
-    this.searchFormGroup.patchValue({ search: category });
-    this.submitSearch();
+    this.router.navigate([], {
+      queryParams: { category: category, title: null },
+      queryParamsHandling: 'merge'
+    });
+
+    this.movieService.searchMovie(undefined, category).subscribe({
+      next: (data: Moviez[]) => {
+        console.log('Search results:', data);
+        this.moviesList = data; // Update the UI list
+      },
+      error: (err: any) => {
+        console.error('Error searching movie:', err);
+      }
+    });
   }
 
   //search api
@@ -80,13 +99,13 @@ export class App {
 
     const formValue = this.searchFormGroup.value;
 
-    // Map form value 'search' to backend parameter 'title'
-    let queryParams = {
-      title: formValue.search
-    };
+    this.router.navigate([], {
+      queryParams: { title: formValue.search, category: null },
+      queryParamsHandling: 'merge'
+    });
 
     //call the service
-    this.movieService.searchMovie(queryParams).subscribe({
+    this.movieService.searchMovie(formValue.search).subscribe({
       next: (data: Moviez[]) => {
         console.log('Search results:', data);
         this.moviesList = data; // Update the UI list

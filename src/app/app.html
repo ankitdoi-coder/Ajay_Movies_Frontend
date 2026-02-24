@@ -4,7 +4,7 @@
 
     <nav class="navbar navbar-expand-lg px-4">
       <div class="container-fluid">
-        <a href="/"><span><img src="/NEWlogo.png" alt="Logo" class="logo"></span></a>
+        <a routerLink="/"><span><img src="/NEWlogo.png" alt="Logo" class="logo"></span></a>
 
         <!-- Hamburger button for mobile -->
         <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
@@ -15,7 +15,7 @@
         <!-- Desktop menu -->
         <ul class="navbar-nav mx-auto d-none d-lg-flex">
           <li class="nav-item"><a class="nav-link active" href="javascript:void(0)" (click)="goHome()">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('18+')">18+</a></li>
+          <li class="nav-item"><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('DesiJunction')">18+</a></li>
           <li class="nav-item"><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('Bollywood')">Bollywood</a></li>
           <li class="nav-item"><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('Dual Audio')">Dual Audio</a></li>
           <li class="nav-item"><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('Web Series')">Web Series</a></li>
@@ -29,7 +29,7 @@
           </button>
           <ul class="mobile-menu">
             <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)" (click)="goHome()">Home</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)" (click)="searchByCategory('18+'); closeMenu()">18+</a></li>
+            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)" (click)="searchByCategory('+'); closeMenu()">18+</a></li>
             <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)" (click)="searchByCategory('Bollywood'); closeMenu()">Bollywood</a></li>
             <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)" (click)="searchByCategory('Dual Audio'); closeMenu()">Dual Audio</a></li>
             <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)" (click)="searchByCategory('Web Series'); closeMenu()">Web Series</a></li>
@@ -127,16 +127,16 @@
                     (click)="goHome()" href="javascript:void(0)">Home</a>
                 </li>
                 <li class="menu-item">
-                  <a class="ct-menu-link" [class.active]="activeFooterLink === 'Contact'"
-                    (click)="setActiveFooterLink('Contact')" href="">Contact Us</a>
+                  <a class="ct-menu-link" [class.active]="activeFooterLink === 'contactus'"
+                    routerLink="/contactus" (click)="goToContactUs()" href="javascript:void(0)">Contact Us</a>
                 </li>
                 <li class="menu-item">
                   <a class="ct-menu-link" [class.active]="activeFooterLink === 'About'"
-                    (click)="setActiveFooterLink('About')" href="">About Us</a>
+                    routerLink="/about" (click)="setActiveFooterLink('About')" href="javascript:void(0)">About Us</a>
                 </li>
                 <li class="menu-item">
                   <a class="ct-menu-link" [class.active]="activeFooterLink === 'Disclaimer'"
-                    (click)="setActiveFooterLink('Disclaimer')" href="">Disclaimer</a>
+                    (click)="setActiveFooterLink('Disclaimer')" href="javascript:void(0)">Disclaimer</a>
                 </li>
               </ul>
             </nav>
