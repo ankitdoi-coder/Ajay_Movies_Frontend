@@ -1,13 +1,68 @@
-# FrontEnd
+# 🎬 Ajay Movie Production - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![RxJS](https://img.shields.io/badge/RxJS-B7178C?style=for-the-badge&logo=reactivex&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 
-## Development server
+**🔴 Live Demo:** [https://ajay-movies-frontend.onrender.com](https://ajay-movies-frontend.onrender.com)
 
-To start a local development server, run:
+## 📖 Overview
+
+Welcome to the frontend repository for **Ajay Movie Production**. This robust Single Page Application (SPA) is engineered to deliver a seamless and interactive experience for movie enthusiasts and administrators alike. Built with the **Angular** framework and integrated with a **Spring Boot** backend, this project demonstrates modern web development practices, reactive state management, and a clean, responsive user interface.
+
+## ✨ Key Features
+
+*   **🎥 Dynamic Movie Catalog**: Browse, search, and filter through an extensive library of movies with real-time updates.
+*   **🔐 Secure Authentication**: Robust login and registration system using JWT (JSON Web Tokens).
+*   **⚡ Reactive Architecture**: Powered by **RxJS** for efficient data handling, asynchronous operations, and state management.
+*   **📱 Responsive Design**: Fully optimized layout ensuring a consistent experience across desktops, tablets, and mobile devices.
+*   **🛠️ Admin Dashboard**: Comprehensive tools for managing movie listings, user roles, and production schedules.
+*   **🎨 Modern UI/UX**: Intuitive design focusing on user engagement and accessibility.
+
+## 🛠️ Tech Stack
+
+*   **Framework**: [Angular](https://angular.io/)
+*   **Language**: [TypeScript](https://www.typescriptlang.org/)
+*   **Styling**: CSS / SCSS / Bootstrap
+*   **HTTP Client**: Angular HttpClient
+*   **Build Tool**: Angular CLI
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Ensure you have the following installed:
+*   [Node.js](https://nodejs.org/) (LTS version recommended)
+*   [Angular CLI](https://github.com/angular/angular-cli)
+
+### Installation
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/your-username/ajay-movies-frontend.git
+    cd ajay-movies-frontend
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Start the development server**
+    ```bash
+    ng serve
+    ```
+    Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## 🏗️ Build
+
+To build the project for production:
 
 ```bash
-ng serve
+ng build
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
