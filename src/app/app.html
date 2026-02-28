@@ -1,176 +1,173 @@
-<div class="body">
+<nav class="navbar">
+  <div class="navbar-inner">
 
-  <div class="container">
-
-    <nav class="navbar navbar-expand-lg px-4">
-      <div class="container-fluid">
-        <a routerLink="/"><span><img src="/NEWlogo.png" alt="Logo" class="logo"></span></a>
-
-        <!-- Hamburger button for mobile -->
-        <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-controls="navbarNav"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Desktop menu -->
-        <ul class="navbar-nav mx-auto d-none d-lg-flex">
-          <li class="nav-item"><a class="nav-link active" href="javascript:void(0)" (click)="goHome()">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)"
-              (click)="searchByCategory('DesiJunction')">18+</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)"
-              (click)="searchByCategory('Bollywood')">Bollywood</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)"
-              (click)="searchByCategory('Dual Audio')">Dual Audio</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)"
-              (click)="searchByCategory('Web Series')">Web Series</a></li>
-          <li class="nav-item"><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('TV Show')">TV
-              Show</a></li>
-        </ul>
-
-        <!-- Mobile menu overlay -->
-        <div class="mobile-menu-overlay" [class.active]="menuOpen">
-          <button class="close-btn" (click)="closeMenu()" aria-label="Close menu">
-            <span class="close-icon">&times;</span>
-          </button>
-          <ul class="mobile-menu">
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)"
-                (click)="goHome()">Home</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)"
-                (click)="searchByCategory('+'); closeMenu()">18+</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)"
-                (click)="searchByCategory('Bollywood'); closeMenu()">Bollywood</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)"
-                (click)="searchByCategory('Dual Audio'); closeMenu()">Dual Audio</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)"
-                (click)="searchByCategory('Web Series'); closeMenu()">Web Series</a></li>
-            <li class="mobile-menu-item"><a class="mobile-menu-link" href="javascript:void(0)"
-                (click)="searchByCategory('TV Show'); closeMenu()">TV Show</a></li>
-          </ul>
-        </div>
-
-        <div class="input-group search-container">
-          <form style="gap:15px;" class="d-flex" [formGroup]="searchFormGroup" (ngSubmit)="submitSearch()">
-            <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="Search"
-              formControlName="search">
-            <button class="btn btn-outline-light" type="submit"><img src="/search-icon.svg" alt="Search"
-                style="width: 16px; height: 16px;"></button>
-          </form>
-
-        </div>
-      </div>
-    </nav>
-
-    <section class="container py-4">
-
-      <!-- Big Search -->
-      <div class="main-search mb-4">
-        <input type="text" class="big-search form-control" placeholder="Search movies, series, hindi"
-          [formControl]="searchFormGroup.get('search')" (keydown.enter)="submitSearch()">
-      </div>
-
-      <section style="margin-bottom: 50px;">
-        <!-- Action Buttons -->
-        <div class="d-flex justify-content-center  mb-4 flex-wrap">
-          <button class="action-btn btn-anime topbtn" (click)="searchByCategory('ANIME')">
-            <i class="fa-solid fa-rocket"></i> ANIME</button>
-          <button class="action-btn btn-desi topbtn" (click)="searchByCategory('DESI JUNCTION')">
-            <i class="fa-solid fa-pepper-hot"></i>DESI JUNCTION</button>
-          <button class="action-btn btn-telegram topbtn">
-            <i class="fa-brands fa-telegram"></i> JOIN TELEGRAM</button>
-          <button class="action-btn btn-download topbtn"><i class="fa fa-eye"></i>
-            HOW TO DOWNLOAD</button>
-        </div>
-
-        <!-- Categories -->
-        <div class="category-wrap">
-          <button class="cat-btn topbtn" (click)="searchByCategory('18+')">18+</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('BANGALI')">BANGALI</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('BOLLYWOOD')">BOLLYWOOD</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('CHINESE')">CHINESE</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('DUAL AUDIO')">DUAL AUDIO</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('ENGLISH')">ENGLISH</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('GUJARATI')">GUJARATI</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('HINDI')">HINDI</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('HOLLYWOOD')">HOLLYWOOD</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('KANNADA MOVIE')">KANNADA MOVIE</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('KOREAN')">KOREAN</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('MALAYALAM')">MALAYALAM</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('MARATHI')">MARATHI</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('ODIA')">ODIA</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('PUNJABI')">PUNJABI</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('SOUTH INDIAN')">SOUTH INDIAN</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('TAMIL')">TAMIL</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('TELUGU')">TELUGU</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('TV SHOW')">TV SHOW</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('URDU')">URDU</button>
-          <button class="cat-btn topbtn" (click)="searchByCategory('WEB SERIES')">WEB SERIES</button>
-        </div>
-
-        <!-- Search Results Section (Moved Inside Container) -->
-        <div class="movie-container mt-4" *ngIf="moviesList">
-          <h2 class="text-white mb-3" *ngIf="moviesList.length > 0">Search Results</h2>
-
-          <div class="movie-grid" *ngIf="moviesList.length > 0">
-            <div (click)="movie.id && openMovie(movie.id)" class="movie-card" *ngFor="let movie of moviesList">
-              <img [src]="movieService.getMovieImageUrl(movie.posterPath)" alt="{{ movie.title }}"
-                class="img-fluid rounded">
-              <h5 class="mt-2">{{ movie.title }}</h5>
-              <p style="color: #9ba2a8;" class="small">{{ movie.category }} | {{ movie.movieInfo_releaseYear }}</p>
-            </div>
-          </div>
-
-          <div *ngIf="moviesList.length === 0" class="alert alert-warning">
-            <p class="mb-0">No movies found matching your search.</p>
-          </div>
-        </div>
-
-      </section>
-    </section>
-
-    <router-outlet></router-outlet>
-
-    <footer class="ct-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <nav class="footer-menu-inline menu-container">
-              <ul class="menu">
-                <li class="menu-item">
-                  <a class="ct-menu-link" [class.active]="activeFooterLink === 'Home'" (click)="goHome()"
-                    href="javascript:void(0)">Home</a>
-                </li>
-                <li class="menu-item">
-                  <a class="ct-menu-link" [class.active]="activeFooterLink === 'contactus'" routerLink="/contactus"
-                    (click)="goToContactUs()" href="javascript:void(0)">Contact Us</a>
-                </li>
-                <li class="menu-item">
-                  <a class="ct-menu-link" [class.active]="activeFooterLink === 'Aboutus'" routerLink="/aboutus"
-                    (click)="setActiveFooterLink('Aboutus')" href="javascript:void(0)">About Us</a>
-                </li>
-                <li class="menu-item">
-                  <a class="ct-menu-link" [class.active]="activeFooterLink === 'Disclaimer'" routerLink="/disclaimer"
-                    (click)="setActiveFooterLink('Disclaimer')" href="javascript:void(0)">Disclaimer</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div class="col-sm-6">
-            <div class="ct-footer-copyright">
-              <p>Copyright ©️ 2026 Created by ❤️ Ankit Gurjar & Team</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <a class="telegram-button" href="https://t.me/+igUrTM5-zxY4M2Jl" target="_blank" rel="noopener noreferrer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
-        <circle cx="120" cy="120" r="120" fill="#0088cc"></circle>
-        <path fill="#fff"
-          d="M179 74.9c1.3-.8 2.3-.3 2 1.2l-25.7 120.8c-.4 1.9-1.6 2.4-3.3 1.5l-35.3-26.1-17 16.4c-.2.2-.5.4-.8.4s-.5-.1-.7-.4c-.1-.1-.2-.4-.2-.7l6.1-43.2 78.7-71.1c.5-.5.3-.9-.4-.6l-97.4 61.2-38.7-12.1c-2.1-.7-2.2-2.2.4-3.3l149.9-57.5z">
-        </path>
-      </svg>
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-logo">
+      <img src="/NEWlogo.png" alt="Ajay Movie" class="logo">
     </a>
+
+    <!-- Desktop Nav Links (center) -->
+    <ul class="navbar-nav-links">
+      <li><a class="nav-link active" href="javascript:void(0)" (click)="goHome()">Home</a></li>
+      <li><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('DesiJunction')">18+</a></li>
+      <li><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('Bollywood')">Bollywood</a></li>
+      <li><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('Dual Audio')">Dual Audio</a></li>
+      <li><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('Web Series')">Web Series</a></li>
+      <li><a class="nav-link" href="javascript:void(0)" (click)="searchByCategory('TV Show')">TV Show</a></li>
+    </ul>
+
+    <!-- Search (right side, desktop) -->
+    <form class="navbar-search" [formGroup]="searchFormGroup" (ngSubmit)="submitSearch()">
+      <input type="text" class="search-input" placeholder="Search movies..." formControlName="search">
+      <button type="submit" class="search-btn" aria-label="Search">
+        <img src="/search-icon.svg" alt="Search" width="16" height="16">
+      </button>
+    </form>
+
+    <!-- Hamburger (mobile only) -->
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()" aria-label="Toggle navigation">
+      <span class="toggler-bar"></span>
+      <span class="toggler-bar"></span>
+      <span class="toggler-bar"></span>
+    </button>
+
   </div>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-overlay" [class.active]="menuOpen">
+  <button class="close-btn" (click)="closeMenu()" aria-label="Close menu">
+    <span>&times;</span>
+  </button>
+
+  <!-- Mobile Search -->
+  <form class="mobile-search" [formGroup]="searchFormGroup" (ngSubmit)="submitSearch(); closeMenu()">
+    <input type="text" class="search-input" placeholder="Search movies..." formControlName="search">
+    <button type="submit" class="search-btn" aria-label="Search">
+      <img src="/search-icon.svg" alt="" width="16" height="16">
+    </button>
+  </form>
+
+  <ul class="mobile-nav">
+    <li><a href="javascript:void(0)" (click)="goHome(); closeMenu()">Home</a></li>
+    <li><a href="javascript:void(0)" (click)="searchByCategory('DesiJunction'); closeMenu()">18+</a></li>
+    <li><a href="javascript:void(0)" (click)="searchByCategory('Bollywood'); closeMenu()">Bollywood</a></li>
+    <li><a href="javascript:void(0)" (click)="searchByCategory('Dual Audio'); closeMenu()">Dual Audio</a></li>
+    <li><a href="javascript:void(0)" (click)="searchByCategory('Web Series'); closeMenu()">Web Series</a></li>
+    <li><a href="javascript:void(0)" (click)="searchByCategory('TV Show'); closeMenu()">TV Show</a></li>
+  </ul>
 </div>
+
+<section class="container py-4">
+
+  <!-- Big Search -->
+  <div class="main-search mb-4">
+    <input type="text" class="big-search form-control" placeholder="Search movies, series, hindi"
+      [formControl]="searchFormGroup.get('search')" (keydown.enter)="submitSearch()">
+  </div>
+
+  <section style="margin-bottom: 50px;">
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-center  mb-4 flex-wrap">
+      <button class="action-btn btn-anime topbtn" (click)="searchByCategory('ANIME')">
+        <i class="fa-solid fa-rocket"></i> ANIME</button>
+      <button class="action-btn btn-desi topbtn" (click)="searchByCategory('DESI JUNCTION')">
+        <i class="fa-solid fa-pepper-hot"></i>DESI JUNCTION</button>
+      <button class="action-btn btn-telegram topbtn">
+        <i class="fa-brands fa-telegram"></i> JOIN TELEGRAM</button>
+      <button class="action-btn btn-download topbtn"><i class="fa fa-eye"></i>
+        HOW TO DOWNLOAD</button>
+    </div>
+
+    <!-- Categories -->
+    <div class="category-wrap">
+      <button class="cat-btn topbtn" (click)="searchByCategory('18+')">18+</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('BANGALI')">BANGALI</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('BOLLYWOOD')">BOLLYWOOD</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('CHINESE')">CHINESE</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('DUAL AUDIO')">DUAL AUDIO</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('ENGLISH')">ENGLISH</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('GUJARATI')">GUJARATI</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('HINDI')">HINDI</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('HOLLYWOOD')">HOLLYWOOD</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('KANNADA MOVIE')">KANNADA MOVIE</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('KOREAN')">KOREAN</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('MALAYALAM')">MALAYALAM</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('MARATHI')">MARATHI</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('ODIA')">ODIA</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('PUNJABI')">PUNJABI</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('SOUTH INDIAN')">SOUTH INDIAN</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('TAMIL')">TAMIL</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('TELUGU')">TELUGU</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('TV SHOW')">TV SHOW</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('URDU')">URDU</button>
+      <button class="cat-btn topbtn" (click)="searchByCategory('WEB SERIES')">WEB SERIES</button>
+    </div>
+
+    <!-- Search Results Section (Moved Inside Container) -->
+    <div class="movie-container mt-4" *ngIf="moviesList">
+      <h2 class="text-white mb-3" *ngIf="moviesList.length > 0">Search Results</h2>
+
+      <div class="movie-grid" *ngIf="moviesList.length > 0">
+        <div (click)="movie.id && openMovie(movie.id)" class="movie-card" *ngFor="let movie of moviesList">
+          <img [src]="movieService.getMovieImageUrl(movie.posterPath)" alt="{{ movie.title }}"
+            class="img-fluid rounded">
+          <h5 class="mt-2">{{ movie.title }}</h5>
+          <p style="color: #9ba2a8;" class="small">{{ movie.category }} | {{ movie.movieInfo_releaseYear }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="moviesList.length === 0" class="alert alert-warning">
+        <p class="mb-0">No movies found matching your search.</p>
+      </div>
+    </div>
+
+  </section>
+</section>
+
+<router-outlet></router-outlet>
+
+<footer class="ct-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <nav class="footer-menu-inline menu-container">
+          <ul class="menu">
+            <li class="menu-item">
+              <a class="ct-menu-link" [class.active]="activeFooterLink === 'Home'" (click)="goHome()"
+                href="javascript:void(0)">Home</a>
+            </li>
+            <li class="menu-item">
+              <a class="ct-menu-link" [class.active]="activeFooterLink === 'contactus'" routerLink="/contactus"
+                (click)="goToContactUs()" href="javascript:void(0)">Contact Us</a>
+            </li>
+            <li class="menu-item">
+              <a class="ct-menu-link" [class.active]="activeFooterLink === 'Aboutus'" routerLink="/aboutus"
+                (click)="setActiveFooterLink('Aboutus')" href="javascript:void(0)">About Us</a>
+            </li>
+            <li class="menu-item">
+              <a class="ct-menu-link" [class.active]="activeFooterLink === 'Disclaimer'" routerLink="/disclaimer"
+                (click)="setActiveFooterLink('Disclaimer')" href="javascript:void(0)">Disclaimer</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-sm-6">
+        <div class="ct-footer-copyright">
+          <p>Copyright ©️ 2026 Created by ❤️ Ankit Gurjar & Team</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<a class="telegram-button" href="https://t.me/+igUrTM5-zxY4M2Jl" target="_blank" rel="noopener noreferrer">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+    <circle cx="120" cy="120" r="120" fill="#0088cc"></circle>
+    <path fill="#fff"
+      d="M179 74.9c1.3-.8 2.3-.3 2 1.2l-25.7 120.8c-.4 1.9-1.6 2.4-3.3 1.5l-35.3-26.1-17 16.4c-.2.2-.5.4-.8.4s-.5-.1-.7-.4c-.1-.1-.2-.4-.2-.7l6.1-43.2 78.7-71.1c.5-.5.3-.9-.4-.6l-97.4 61.2-38.7-12.1c-2.1-.7-2.2-2.2.4-3.3l149.9-57.5z">
+    </path>
+  </svg>
+</a>
+

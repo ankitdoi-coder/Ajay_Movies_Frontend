@@ -1,3 +1,4 @@
+
 /* =========================================
    1. GLOBAL RESET & BASE STYLES
    ========================================= */
@@ -7,15 +8,20 @@
     --text-main: #e0e0e0;
     --text-muted: #aaaaaa;
     --accent-green: #a4ff00;
-    /* The neon green from screenshots */
     --accent-red: #ff0000;
-    /* The red used for Search/Submit */
     --border-color: #333;
     --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-* {
+/* KEY FIX: Prevent horizontal overflow at root level */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden; /* Prevent horizontal scroll on html */
 }
 
 :host {
@@ -30,6 +36,8 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* KEY FIX: prevent body horizontal scroll */
+    width: 100%;
 }
 
 a {
@@ -52,6 +60,7 @@ img {
    2. LAYOUT CONTAINERS
    ========================================= */
 .ct-container {
+    max-width: 100%; /* KEY FIX: never exceed viewport */
     margin: 0 auto;
     padding: 20px;
     display: flex;
@@ -59,27 +68,25 @@ img {
     gap: 30px;
 }
 
-/* Main Content Area */
 #main {
     width: 100%;
+    overflow-x: hidden; /* KEY FIX */
 }
 
-.ct-container>article {
+.ct-container > article {
     flex: 3;
-    /* Takes up approx 75% width */
-    min-width: 0;
-    /* Prevents flex overflow */
+    min-width: 0; /* KEY FIX: critical for flex children to not overflow */
+    overflow-x: hidden;
 }
 
-/* Sidebar Area */
+/* Sidebar */
 #sidebar {
     flex: 1;
-    /* Takes up approx 25% width */
-    min-width: 300px;
-    border-left: 1px solid rgba(224, 229, 235, 0.8);
+    min-width: 260px;
+    max-width: 320px;
+    border-left: 1px solid rgba(224, 229, 235, 0.15);
     padding-left: 20px;
-    
-
+    overflow-x: hidden;
 }
 
 .ct-sidebar {
@@ -87,9 +94,20 @@ img {
     top: 80px;
 }
 
+/* =========================================
+   3. RESPONSIVE BREAKPOINTS
+   ========================================= */
 @media (max-width: 900px) {
     .ct-container {
         flex-direction: column;
+    }
+
+    #sidebar {
+        max-width: 100%;
+        border-left: none;
+        border-top: 1px solid #333;
+        padding-left: 0;
+        padding-top: 20px;
     }
 }
 
@@ -100,7 +118,8 @@ img {
     }
 
     .page-title {
-        font-size: 28px;
+        font-size: 24px;
+        word-break: break-word;
     }
 
     .entry-content h3,
@@ -111,13 +130,14 @@ img {
     }
 
     .entry-content p {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .dwd-button {
-        padding: 10px 25px;
+        width: 100%;
+        max-width: 280px;
+        padding: 10px 20px;
         font-size: 0.9rem;
-        min-width: 180px;
     }
 
     .ct-comment-inner {
@@ -126,7 +146,7 @@ img {
     }
 
     .ct-comment-content::before {
-        display: none; // Hide speech bubble on mobile
+        display: none;
     }
 }
 
@@ -137,14 +157,12 @@ img {
     }
 
     .page-title {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .entry-content h3,
     .entry-content h4 {
         font-size: 14px;
-        margin-top: 15px;
-        margin-bottom: 8px;
     }
 
     .entry-content p {
@@ -152,9 +170,10 @@ img {
     }
 
     .dwd-button {
-        padding: 8px 20px;
+        width: 100%;
+        max-width: 100%;
+        padding: 10px 15px;
         font-size: 0.85rem;
-        min-width: 160px;
     }
 
     .ct-breadcrumbs {
@@ -163,33 +182,27 @@ img {
 }
 
 /* =========================================
-   3. TYPOGRAPHY & HEADERS
+   4. TYPOGRAPHY & HEADERS
    ========================================= */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     color: #fff;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.2;
+    word-break: break-word; /* KEY FIX: long titles won't overflow */
 }
 
-/* The Main Page Title */
 .page-title {
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 800;
     margin-top: 10px;
     margin-bottom: 20px;
+    word-break: break-word;
 }
 
-/* Specific "Movie Info" Green Text styling */
 .entry-content h3,
 .entry-content h4 {
     color: #19af26;
-    /* Neon Green for sections like "Movie Info", "Plot", "Screenshots" */
     font-weight: bold;
     text-transform: uppercase;
     font-size: 17px;
@@ -201,77 +214,44 @@ h6 {
     color: #84c31a;
 }
 
-/* Strong tags usually white or green in this context */
 .entry-content p strong {
     color: #fff;
 }
 
-/* "Movie Info" specific labels (e.g., IMDb Rating:) */
 .entry-content p {
     margin-bottom: 15px;
     font-size: larger;
     color: #ccc;
+    overflow-wrap: break-word; /* KEY FIX: long words wrap */
+    word-break: break-word;
 }
 
 .entry-content button {
     padding: 8px 10px;
     margin: 4px;
-    border-radius: 0px;
-    box-shadow: 0px 4px 7px #ccc;
+    border-radius: 0;
+    box-shadow: 0 4px 7px #ccc;
     font-weight: bold;
     margin-bottom: 10px;
     background: linear-gradient(135deg, rgb(237, 11, 11) 0%, rgb(242, 209, 82) 100%);
     color: white;
-}
-
-.dwd-button {
-    color: #fff !important;
-    min-width: 210px !important;
-    background: linear-gradient(135deg, #67df03b8, #1356d5b8) !important;
-    margin-bottom: 15px !important;
+    border: none;
+    cursor: pointer;
 }
 
 /* =========================================
-   4. BREADCRUMBS
+   5. DOWNLOAD BUTTONS
    ========================================= */
-.ct-breadcrumbs {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-}
-
-.ct-breadcrumbs a {
-    color: var(--text-muted);
-}
-
-.ct-breadcrumbs .ct-separator {
-    margin: 0 8px;
-    opacity: 0.6;
-}
-
-.ct-breadcrumbs .last-item {
-    color: #fff;
-}
-
-/* =========================================
-   5. DOWNLOAD BUTTONS (Gradient Style)
-   ========================================= */
-/* Targeting the headings wrapping the buttons to be green */
 h4[style*="text-align: center"] {
     color: var(--accent-green) !important;
     font-size: 1rem;
     margin-bottom: 10px;
 }
 
-/* The Button Itself */
 .dwd-button {
     display: inline-block;
-    /* Gradient from Green to Blue as seen in image_e4a919.jpg */
     background: linear-gradient(180deg, #5ab52b 0%, #0860a8 100%);
-    color: white;
+    color: white !important;
     font-weight: bold;
     font-size: 1rem;
     padding: 12px 35px;
@@ -282,8 +262,9 @@ h4[style*="text-align: center"] {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     transition: transform 0.2s, box-shadow 0.2s;
     width: 250px;
-    /* Approximate width */
+    max-width: 100%; /* KEY FIX: never overflow on small screens */
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .dwd-button:hover {
@@ -296,7 +277,6 @@ h4[style*="text-align: center"] {
     margin-bottom: 25px;
 }
 
-/* HR Separator */
 hr {
     border: 0;
     border-top: 1px solid #333;
@@ -304,7 +284,36 @@ hr {
 }
 
 /* =========================================
-   6. SHARE BOX
+   6. BREADCRUMBS
+   ========================================= */
+.ct-breadcrumbs {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-bottom: 10px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.ct-breadcrumbs a {
+    color: var(--text-muted);
+}
+
+.ct-breadcrumbs .ct-separator {
+    margin: 0 6px;
+    opacity: 0.6;
+    flex-shrink: 0;
+}
+
+.ct-breadcrumbs .last-item {
+    color: #fff;
+}
+
+/* =========================================
+   7. SHARE BOX
    ========================================= */
 .ct-share-box {
     border: 1px solid #333;
@@ -323,190 +332,181 @@ hr {
 
 .ct-share-box [data-icons-type="simple"] {
     display: flex;
+    flex-wrap: wrap; /* KEY FIX: wrap on small screens */
     gap: 0;
-    /* Icons are usually connected or close */
 }
 
 .ct-share-box a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    /* Stretch to fill */
+    flex: 1;
+    min-width: 40px;
     padding: 10px;
     background: #222;
     border-right: 1px solid #333;
     transition: background 0.2s;
 }
 
-.ct-share-box a:hover {
-    background: #333;
+.ct-share-box a:last-child {
+    border-right: none;
 }
+
+.ct-share-box a:hover { background: #333; }
 
 .ct-share-box svg {
     fill: #fff;
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
 }
 
-/* Specific Brand Colors on Hover (Optional, adds nice touch) */
-.ct-share-box a[data-network="facebook"]:hover {
-    background: #3b5998;
-}
-
-.ct-share-box a[data-network="twitter"]:hover {
-    background: #000;
-}
-
-.ct-share-box a[data-network="whatsapp"]:hover {
-    background: #25d366;
-}
-
-.ct-share-box a[data-network="telegram"]:hover {
-    background: #0088cc;
-}
+.ct-share-box a[data-network="facebook"]:hover { background: #3b5998; }
+.ct-share-box a[data-network="twitter"]:hover  { background: #000; }
+.ct-share-box a[data-network="whatsapp"]:hover { background: #25d366; }
+.ct-share-box a[data-network="telegram"]:hover { background: #0088cc; }
 
 /* =========================================
-   7. RELATED MOVIES GRID
+   8. SCREENSHOTS GRID
    ========================================= */
-// .ct-related-posts {
-//     margin-top: 40px;
-// }
-
-// .ct-related-posts h5.ct-module-title {
-//     font-size: 1.2rem;
-//     border-bottom: 2px solid var(--accent-red);
-//     display: inline-block;
-//     padding-bottom: 5px;
-//     margin-bottom: 20px;
-// }
-
-// .ct-related-posts-items {
-//     display: grid;
-//     /* Responsive grid: min 150px width per item */
-//     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-//     gap: 20px;
-// }
-
-// .ct-related-posts-items article {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 10px;
-//     background: transparent;
-//     box-shadow: none;
-//     padding: 0;
-//     border-radius: 0;
-// }
-
-// .ct-related-posts-items img {
-//     width: 100%;
-//     border-radius: 4px;
-//     border: 1px solid #333;
-//     transition: opacity 0.2s;
-// }
-
-// .ct-related-posts-items img:hover {
-//     opacity: 0.8;
-// }
-
-// .related-entry-title {
-//     margin: 0;
-//     font-size: 18px;
-//     text-transform: capitalize;
-//     font-weight: 700;
-//     line-height: 2;
-// }
-
-// .related-entry-title a {
-//     color: #ddd;
-// }
-
-// .related-entry-title a:hover {
-//     color: var(--accent-red);
-// }
-
-/* Container for Related Movies */
-.ct-related-posts {
-    padding: 20px;
+h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
 }
 
-.ct-module-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #fff; /* Adjust color */
-}
-
-/* Grid layout for related posts */
-.ct-related-posts-items {
+.screenshots-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Responsive grid */
-    gap: 15px;
-    margin-top: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
 }
 
-/* Styling for individual movie items */
-.ct-related-posts .post {
-    background-color: #2b2b2b; /* Slight dark background for the posts */
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.screenshots-grid p {
+    margin: 0;
+}
+
+.screenshots-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #000;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Image hover effect */
-.ct-related-posts .post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+.screenshots-grid img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
 }
 
-/* Thumbnail size and styling */
-.ct-media-container img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    object-fit: cover;
-}
-
-/* Title styling */
-.related-entry-title {
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff; /* Title color */
-    margin-top: 10px;
-    text-align: center;
-}
-
-.related-entry-title a {
-    color: #fff;
-    text-decoration: none;
-}
-
-.related-entry-title a:hover {
-    text-decoration: underline;
-}
-
-/* Additional responsiveness */
 @media (max-width: 768px) {
-    .ct-related-posts-items {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    .screenshots-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .screenshots-grid img {
+        height: auto;
+        aspect-ratio: 16/9;
     }
 }
 
 /* =========================================
-   8. SIDEBAR WIDGETS
+   9. RELATED MOVIES GRID
+   ========================================= */
+.ct-related-posts {
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.ct-related-posts .ct-module-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.ct-related-posts-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.ct-related-posts .post {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ct-related-posts .post:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ct-media-container {
+    display: block;
+    position: relative;
+    border: 3px solid transparent;
+    border-image: linear-gradient(90deg, #e93535, #f4c922) 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.ct-media-container img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 14;
+    object-fit: cover;
+    display: block;
+}
+
+.entry-card:hover .ct-media-container {
+    transform: scale(1.05);
+    box-shadow: 0 0 28px rgba(255, 122, 0, 0.9);
+}
+
+.related-entry-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    margin: 8px 10px;
+    text-align: center;
+    word-break: break-word;
+    line-height: 1.4;
+}
+
+.related-entry-title a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+.related-entry-title a:hover {
+    color: var(--accent-green);
+}
+
+@media (max-width: 480px) {
+    .ct-related-posts-items {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+/* =========================================
+   10. SIDEBAR WIDGETS
    ========================================= */
 .ct-widget {
     margin-bottom: 30px;
-    
     padding: 15px;
     border-bottom: 1px solid #1f1f1f;
 }
 
-/* Search Widget */
 .wp-block-search__inside-wrapper {
     display: flex;
     gap: 6px;
+    width: 100%;
 }
 
 .wp-block-search__input {
@@ -514,7 +514,8 @@ hr {
     border: 1px solid #333;
     color: #fff;
     padding: 10px;
-    flex-grow: 1;
+    flex: 1;
+    min-width: 0; /* KEY FIX */
     border-radius: 4px 0 0 4px;
     height: 40px;
     font-size: 14px;
@@ -523,13 +524,14 @@ hr {
 .wp-block-search__button {
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 16px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 0 4px 4px 0;
     height: 40px;
-    min-width: 90px;
+    white-space: nowrap;
     background: #ff0000;
+    flex-shrink: 0;
 }
 
 .wp-block-search__label,
@@ -541,33 +543,33 @@ hr {
     margin-bottom: 10px;
 }
 
-/* Recent Posts Widget */
 .wp-block-latest-posts {
     list-style: disc;
-    padding-left: 18px !important;
+    padding-left: 18px;
     color: #666;
+    margin: 0;
+    padding-right: 0;
 }
 
 .wp-block-latest-posts li {
     margin-bottom: 12px;
     border-bottom: 1px solid #222;
-    padding-bottom: 8px;
+    padding-bottom: 10px;
     font-size: 14px;
     line-height: 1.6;
-    padding-bottom: 10px;
 }
 
 .wp-block-latest-posts a {
     color: #e6e6e6;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 15px;
+    word-break: break-word;
 }
 
 .wp-block-latest-posts a:hover {
     color: var(--accent-red);
 }
 
-/* Dropdown */
 select {
     width: 100%;
     background: #1a1a1a;
@@ -578,19 +580,23 @@ select {
 }
 
 /* =========================================
-   9. COMMENTS SECTION
+   11. COMMENTS SECTION
    ========================================= */
 .ct-comments-container {
     background: #000;
     padding: 30px 0;
     margin-top: 40px;
     border-top: 1px solid #222;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .ct-container-narrow {
     max-width: 800px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .ct-comments-title {
@@ -600,7 +606,6 @@ select {
     margin-bottom: 20px;
 }
 
-/* Comment Form */
 .comment-reply-title {
     font-size: 1.2rem;
     color: #fff;
@@ -629,15 +634,16 @@ select {
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 3px;
+    box-sizing: border-box; /* KEY FIX */
 }
 
 .comment-form textarea {
     height: 120px;
+    resize: vertical;
 }
 
 .form-submit .submit {
     background: #ff0000;
-    /* Red Submit Button */
     color: white;
     border: none;
     padding: 10px 25px;
@@ -646,13 +652,13 @@ select {
     border-radius: 3px;
     text-transform: uppercase;
     font-size: 0.9rem;
+    transition: background 0.2s;
 }
 
 .form-submit .submit:hover {
     background: #d30000;
 }
 
-/* Existing Comments List */
 .ct-comment-list {
     list-style: none;
     padding: 0;
@@ -665,48 +671,47 @@ select {
     margin-bottom: 25px;
     padding-bottom: 25px;
     border-bottom: 1px solid #1a1a1a;
+    min-width: 0; /* KEY FIX */
 }
 
-.ct-media-container {
+/* Comment Avatar Border */
+.ct-comment-meta .ct-media-container {
     display: block;
     position: relative;
-    // border: 4px solid #ffae00;
-    border: 7px solid;
-    border-image: linear-gradient(90deg, #e93535, #f4c922) 2;
+    border: 4px solid transparent;
+    border-image: linear-gradient(90deg, #e93535, #f4c922) 1;
     border-radius: 2px;
-    // box-shadow: 0 0 18px rgba(255, 122, 0, 0.6);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: fit-content;
+    flex-shrink: 0;
 }
 
-.ct-media-container img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 9 / 14;
+.ct-comment-meta .ct-media-container img {
+    width: 60px;
+    height: 60px;
+    aspect-ratio: 1/1;
     object-fit: cover;
     display: block;
-}
-
-.entry-card:hover .ct-media-container {
-    transform: scale(1.05);
-    box-shadow: 0 0 28px rgba(255, 122, 0, 0.9);
 }
 
 .ct-comment-meta {
     flex-shrink: 0;
     text-align: center;
+    min-width: 0;
 }
 
 .ct-comment-meta-data {
     font-size: 0.75rem;
     color: #666;
     margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .ct-comment-author cite {
     font-style: normal;
     font-weight: bold;
     color: var(--accent-green);
-    /* Author Name Green */
     font-size: 0.9rem;
     display: block;
     margin-top: 5px;
@@ -717,11 +722,12 @@ select {
     padding: 15px;
     border-radius: 4px;
     border: 1px solid #222;
-    flex-grow: 1;
+    flex: 1;
+    min-width: 0; /* KEY FIX */
     position: relative;
+    word-break: break-word;
 }
 
-/* Optional: Speech bubble triangle */
 .ct-comment-content::before {
     content: '';
     position: absolute;
@@ -735,51 +741,13 @@ select {
     transform: rotate(45deg);
 }
 
-/* ================================
-   SCREENSHOTS SECTION FIX
-   ================================ */
-
-h4 {
-  margin-top: 25px;
-  margin-bottom: 15px;
-}
-
-/* The screenshots grid container */
-.screenshots-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 per row */
-  gap: 20px;
-}
-
-/* Remove default <p> spacing */
-.screenshots-grid p {
-  margin: 0;
-}
-
-/* Screenshot images */
-.screenshots-grid img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid #333;
-  background: #000;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Hover effect */
-.screenshots-grid img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
-}
-
-/* Responsive (mobile) */
 @media (max-width: 768px) {
-  .screenshots-grid {
-    grid-template-columns: 1fr;
-  }
+    .ct-comment-inner {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-  .screenshots-grid img {
-    height: auto;
-  }
+    .ct-comment-content::before {
+        display: none;
+    }
 }
