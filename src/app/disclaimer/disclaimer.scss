@@ -1,0 +1,143 @@
+/* Base */
+body {
+    background-color: #0d0d0d;
+    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1a0000 0%, #0d0d0d 60%, #001a00 100%);
+    padding: 40px 0;
+    text-align: center;
+    //   border-top: 3px solid #e50000;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='20'%3E%3Cpath d='M0 10 Q10 0 20 10 Q30 20 40 10' stroke='rgba(255,255,255,0.07)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(229, 0, 0, 0.15) 0%, transparent 70%);
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(229, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Content Area */
+.ct-container-full {
+    background-color: #0d0d0d;
+    padding: 52px 20px 72px;
+}
+
+[data-content="narrow"] article {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.entry-content {
+    padding: 0;
+}
+
+/* Paragraphs */
+.entry-content p {
+    font-size: 0.97rem;
+    line-height: 1.85;
+    color: #b0b0b0;
+    margin: 0 0 22px;
+    transition: color 0.3s ease;
+}
+
+.entry-content p:hover {
+    color: #d0d0d0;
+}
+
+/* Bold highlights — vibrant green glow */
+.entry-content p strong {
+    color: #22c55e;
+    font-weight: 700;
+    position: relative;
+    display: inline;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+    cursor: default;
+}
+
+.entry-content p strong:hover {
+    color: #4ade80;
+    text-shadow: 0 0 8px rgba(74, 222, 128, 0.6), 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+/* Underline sweep on strong hover */
+.entry-content p strong::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 1.5px;
+    background: linear-gradient(90deg, #22c55e, #4ade80);
+    transition: width 0.3s ease;
+}
+
+.entry-content p strong:hover::after {
+    width: 100%;
+}
+
+/* Paragraph left border accent on hover */
+.entry-content p {
+    padding-left: 0;
+    border-left: 2px solid transparent;
+    transition: border-color 0.3s ease, padding-left 0.3s ease, color 0.3s ease;
+}
+
+.entry-content p:hover {
+    border-left: 2px solid #22c55e;
+    padding-left: 14px;
+    color: #d4d4d4;
+}
+
+/* Article card glow */
+.entry-content {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 36px 40px;
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.04), 0 4px 24px rgba(0, 0, 0, 0.6);
+    transition: box-shadow 0.4s ease;
+}
+
+.entry-content:hover {
+    box-shadow: 0 0 60px rgba(34, 197, 94, 0.08), 0 8px 32px rgba(0, 0, 0, 0.7);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #e50000, #22c55e);
+    border-radius: 3px;
+}

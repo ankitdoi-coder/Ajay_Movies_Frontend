@@ -9,15 +9,11 @@ body {
 /* Hero Section */
 .hero-section {
     background-color: #1a0000;
-    background-image: repeating-linear-gradient(120deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 255, 255, 0.03) 10px,
-            rgba(255, 255, 255, 0.03) 20px);
     padding: 32px 0;
     text-align: center;
-    //   border-top: 3px solid #8b0000;
+    // border-top: 3px solid #8b0000;
     position: relative;
+    overflow: hidden;
 }
 
 .hero-section::before {
@@ -52,42 +48,48 @@ body {
     padding: 0;
 }
 
-/* Headings */
-.fittexted_for_content_h2 {
-    color: #fff;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0 0 16px;
+/* About page title (h1 inside header) */
+.entry-content header {
+    margin-bottom: 20px;
 }
 
-.fittexted_for_content_h3 {
-    font-size: revert;
+.entry-content header .title.entry-title {
+    font-size: 1rem;
     font-weight: 400;
     color: #fff;
-    margin: 0 0 8px;
+    margin: 0;
+    line-height: 1.6;
 }
 
-/* Paragraph */
-.entry-content p {
+.entry-content header .title.entry-title strong {
+    font-weight: 700;
+    color: #fff;
+}
+
+/* Inner content box */
+.post-single-content {
     color: #ccc;
+}
+
+/* Paragraphs */
+.post-single-content p {
     font-size: 0.95rem;
-    line-height: 1.7;
-    margin: 0 0 32px;
+    line-height: 1.75;
+    color: #ccc;
+    margin: 0 0 20px;
 }
 
-/* Email label & link */
-.fittexted_for_content_h3 {
+/* Bold labels like "Disclaimer:" and "Note:" */
+.post-single-content p strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* H3 subheading — green accent */
+.post-single-content h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
     color: #4ade80;
-    /* green label "Email:" */
-}
-
-.fittexted_for_content_h3 a {
-    color: #00faed;
-    text-decoration: none;
-}
-
-.fittexted_for_content_h3 a:hover {
-    text-decoration: underline;
-    color: #3eeb2e;
-
+    margin: 0 0 14px;
+    line-height: 1.5;
 }
