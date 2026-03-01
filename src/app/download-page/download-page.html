@@ -207,79 +207,60 @@
         <aside class="" data-type="type-3" id="sidebar" itemtype="https://schema.org/WPSideBar" itemscope="itemscope">
             <div class="ct-sidebar" data-sticky="sidebar">
                 <div class="ct-widget is-layout-flow widget_block widget_search" id="block-2">
-                    <form role="search" method="get" action="https://movies4u.pk/"
-                        class="wp-block-search__button-outside wp-block-search__text-button wp-block-search"><label
-                            class="wp-block-search__label" for="wp-block-search__input-3">Search</label>
-                        <div class="wp-block-search__inside-wrapper"><input class="wp-block-search__input"
-                                id="wp-block-search__input-3" placeholder="" value="" type="search" name="s"
-                                required=""><button aria-label="Search"
-                                class="wp-block-search__button wp-element-button" type="submit">Search</button></div>
+                    <form [formGroup]="searchFormGroup" (ngSubmit)="submitSearch()"
+                        class="wp-block-search__button-outside wp-block-search__text-button wp-block-search">
+                        <label class="wp-block-search__label" for="wp-block-search__input-3">Search</label>
+
+                        <div class="wp-block-search__inside-wrapper">
+                            <input formControlName="search" class="wp-block-search__input" id="wp-block-search__input-3"
+                                placeholder="" value="" type="search" name="s" required="">
+                            <button aria-label="Search" class="wp-block-search__button wp-element-button"
+                                type="submit">Search
+                            </button>
+                        </div>
                     </form>
                 </div>
                 <div class="ct-widget is-layout-flow widget_block" id="block-12">
                     <div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
-                        <ul style="padding-right:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30);"
+                        <p *ngIf="moviesList && moviesList.length === 0" style="padding:var(--wp--preset--spacing--30);">No Movie Found</p>
+                        <ul *ngFor="let movie of moviesList"
+                            style="padding-right:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30);"
                             class="wp-block-latest-posts__list wp-block-latest-posts">
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/the-night-manager-2026-season-2-episodes-03-added-dual-audio-hindi-english-web-series-web-dl/">The
-                                    Night Manager (2026) Season 2 [ Episodes 03 – Added ] Dual-Audio {{ '{'
-                                    }}Hindi-English{{ '}' }} Web
-                                    Series WEB-DL</a></li>
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/pennu-case-2026-malayalam-ts-1080p/">Pennu Case 2026
-                                    Malayalam TS 1080p</a></li>
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/parashakti-2026-tamil-ts-full-movie/">Parashakti (2026)
-                                    Tamil TS Full Movie</a></li>
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/mtv-splitsvilla-season-16-hindi-tv-show-e02-added-1080p-720p-web-dl/">MTV
-                                    Splitsvilla (Season 16) Hindi TV-Show [E02 Added] 1080p | 720p WEB-DL</a></li>
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/laughter-chefs-unlimited-entertainment-season-3-hindi-tv-show-e01-added-480p-720p-1080p/">Laughter
-                                    Chefs Unlimited Entertainment (Season 3) Hindi TV-Show [E15 Added] 480p | 720p |
-                                    1080p</a></li>
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/indian-idol-2025-s16-e01-hindi-sonyliv-web-dl/">Indian
-                                    Idol (Season 16) Hindi TV-Show [E25 Added] SonyLiv WEB-DL</a></li>
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/mark-2025-kannada-hq-hdtc-full-movie/">Mark 2025 Hindi +
-                                    Kannada HQ HDTC Full Movie</a></li>
-                            <li><a class="wp-block-latest-posts__post-title"
-                                    href="https://movies4u.pk/the-great-indian-kapil-show-season-4-hindi-tv-show-s04ep01-added-web-dl/">The
-                                    Great Indian Kapil Show (Season 4) Hindi TV Show [S04EP04 Added] WEB-DL</a></li>
+                            <li>
+                                <a class="wp-block-latest-posts__post-title"
+                                    (click)="movie.id && getMovieById(movie.id)">{{movie.title}}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="ct-widget is-layout-flow widget_block" id="block-13">
                     <div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
                         <div class="wp-block-categories-dropdown wp-block-categories"><label
-                                class="wp-block-categories__label" for="wp-block-categories-3">Categories</label><select
-                                name="category_name" id="wp-block-categories-3" class="postform">
-                                <option value="-1">Select Category</option>
-                                <option class="level-0" value="18">18+</option>
-                                <option class="level-0" value="bangali">Bangali</option>
-                                <option class="level-0" value="bollywood">Bollywood</option>
-                                <option class="level-0" value="chinese">Chinese</option>
-                                <option class="level-0" value="dual-audio">Dual Audio</option>
-                                <option class="level-0" value="english">English</option>
-                                <option class="level-0" value="gujarati">Gujarati</option>
-                                <option class="level-0" value="hindi">Hindi</option>
-                                <option class="level-0" value="hollywood">Hollywood</option>
-                                <option class="level-0" value="kannada-movie">kannada movie</option>
-                                <option class="level-0" value="korean">korean</option>
-                                <option class="level-0" value="malayalam">malayalam</option>
-                                <option class="level-0" value="marathi">marathi</option>
-                                <option class="level-0" value="odia">Odia</option>
-                                <option class="level-0" value="punjabi">Punjabi</option>
-                                <option class="level-0" value="south-indian">South Indian</option>
-                                <option class="level-0" value="tamil">Tamil</option>
-                                <option class="level-0" value="telugu">Telugu</option>
-                                <option class="level-0" value="tv-show">TV show</option>
-                                <option class="level-0" value="urdu">Urdu</option>
-                                <option class="level-0" value="web-series">Web Series</option>
+                                class="wp-block-categories__label" for="wp-block-categories-3">Categories</label>
+
+                            <select #catDropdown (change)="searchByCategory(catDropdown.value)">
+                                <option value="">--Select Category--</option>
+                                <option *ngFor="let category of categories" [value]="category">
+                                    {{category}}
+                                </option>
                             </select>
 
 
+                        </div>
+
+                        <div style="margin-top: 20px;" class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
+                            <p *ngIf="categorySelected && categoryMovieList.length === 0" style="padding:var(--wp--preset--spacing--30);">No Movie Found</p>
+                            <ul *ngFor="let catMovie of categoryMovieList"
+                                style="padding-right:var(--wp--preset--spacing--30);padding-left:var(--wp--preset--spacing--30);"
+                                class="wp-block-latest-posts__list wp-block-latest-posts">
+                                <li>
+                                    <a class="wp-block-latest-posts__post-title"
+                                        (click)="catMovie.id && getMovieById(catMovie.id)">{{catMovie.title}}
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
