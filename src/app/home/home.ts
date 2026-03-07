@@ -15,6 +15,9 @@ import { environment } from '../../environments/environment';
 export class Home implements OnInit {
 
   movies: Moviez[] = [];
+  currentPage: number = 0;
+  totalPages: number = 0;
+  pageSize: number = 12;
 
   movieId:number | null=null;
   apiUrl = environment.apiUrl;
@@ -24,10 +27,36 @@ export class Home implements OnInit {
 
   //loads movies on page Load
   ngOnInit() {
-    this.movieService.getAllMovies().subscribe({
-      next: (data) => this.movies = data,
+    this.loadMovies(this.currentPage);
+  }
+
+  loadMovies(page: number) {
+    this.movieService.getAllMovies(page, this.pageSize).subscribe({
+      next: (data) => {
+        this.movies = data.content;
+        this.totalPages = data.totalPages;
+        this.currentPage = data.number;
+      },
       error: (err) => console.error(err)
     });
+  }
+
+  goToPage(page: number) {
+    if (page >= 0 && page < this.totalPages) {
+      this.loadMovies(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  getVisiblePages(): number[] {
+    const pages: number[] = [];
+    const start = Math.max(0, this.currentPage - 2);
+    const end = Math.min(this.totalPages, this.currentPage + 3);
+    
+    for (let i = start; i < end; i++) {
+      pages.push(i);
+    }
+    return pages;
   }
 
   //get Movie data on Click Movie Card and route to the download page

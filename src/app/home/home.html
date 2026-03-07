@@ -18,14 +18,25 @@
             </div>
             <nav class="ct-pagination">
                 <div class="pagination-grp">
-                    <span class="page-numbers current">1</span>
-                    <a href="" class="page-numbers">2</a>
-                    <a href="" class="page-numbers">3</a>
-                    <a href="" class="page-numbers">4</a>
-                    <span class="page-numbers dots">...</span>
-                    <a href="" class="page-numbers">406</a>
+                    <!-- First Page -->
+                    <a *ngIf="currentPage > 0" (click)="goToPage(0)" class="page-numbers" style="cursor: pointer;">1</a>
+                    
+                    <!-- Dots before visible pages -->
+                    <span *ngIf="currentPage > 2" class="page-numbers dots">...</span>
+                    
+                    <!-- Visible Pages -->
+                    <ng-container *ngFor="let page of getVisiblePages()">
+                        <span *ngIf="page === currentPage" class="page-numbers current">{{ page + 1 }}</span>
+                        <a *ngIf="page !== currentPage" (click)="goToPage(page)" class="page-numbers" style="cursor: pointer;">{{ page + 1 }}</a>
+                    </ng-container>
+                    
+                    <!-- Dots after visible pages -->
+                    <span *ngIf="currentPage < totalPages - 3" class="page-numbers dots">...</span>
+                    
+                    <!-- Last Page -->
+                    <a *ngIf="currentPage < totalPages - 1" (click)="goToPage(totalPages - 1)" class="page-numbers" style="cursor: pointer;">{{ totalPages }}</a>
                 </div>
-                <a href="" class="next page-numbers">
+                <a *ngIf="currentPage < totalPages - 1" (click)="goToPage(currentPage + 1)" class="next page-numbers" style="cursor: pointer;">
                     Next
                     <i class="fa-solid fa-angle-right text-white"></i>
                 </a>

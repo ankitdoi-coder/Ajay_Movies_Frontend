@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Moviez } from '../Models/Moviez';
+import { PageResponse } from '../Models/PageResponse';
 
 @Component({
   selector: 'app-download-page',
@@ -88,9 +89,9 @@ export class DownloadPageComponent implements OnInit {
     const formValue=this.searchFormGroup.value;
     
     this.movieService.searchMovie(formValue.search).subscribe({
-      next: (data: Moviez[]) => {
-        console.log('Search results:', data);
-        this.moviesList = data; // Update the UI list
+      next: (data: PageResponse<Moviez>) => {
+        console.log('Search results:', data.content);
+        this.moviesList = data.content; // Update the UI list
       },
       error: (err: any) => {
         console.error('Error searching movie:', err);
@@ -118,9 +119,9 @@ export class DownloadPageComponent implements OnInit {
     }
     this.categorySelected=true;
     this.movieService.searchMovie(undefined,category).subscribe({
-      next:(data:Moviez[])=>{
-        console.log("seached movies by category :",data);
-        this.categoryMovieList=data;
+      next:(data:PageResponse<Moviez>)=>{
+        console.log("seached movies by category :",data.content);
+        this.categoryMovieList=data.content;
       },
       error:(err:any)=>{
         console.log("error in searching Movies",err);
