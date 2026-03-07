@@ -1,4 +1,5 @@
 import { Screenshot } from './screenShots.modal';
+import { Comment } from './Comment';
 
 export interface Moviez {
   id?: number;
@@ -32,4 +33,7 @@ export interface Moviez {
   downloadLink1080?: string;
 
   category?: string;
+
+  //comments
+  comments?: Comment[];
 }

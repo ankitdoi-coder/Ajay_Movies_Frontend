@@ -4,6 +4,7 @@ import { Moviez } from '../Models/Moviez';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PageResponse } from '../Models/PageResponse';
+import { Comment } from '../Models/Comment';
 
 
 @Injectable({
@@ -44,5 +45,14 @@ export class Movie {
       params.category = category;
     }
     return this.http.get<PageResponse<Moviez>>(`${this.baseUrl}/search`, { params });
+  }
+
+  //comment Service
+  postComment(comment:FormData):Observable<any>{
+    return this.http.post<Comment>(`${this.baseUrl}/add-comment`,comment);
+  }
+
+  getCommentsByMovieId(movieId:any):Observable<Comment>{
+    return this.http.get<any>(`${this.baseUrl}/get-comments/${movieId}`)
   }
 }

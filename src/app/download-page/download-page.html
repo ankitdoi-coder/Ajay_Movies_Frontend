@@ -274,104 +274,61 @@
             <div class="ct-comments" id="comments">
 
                 <h3 class="ct-comments-title">
-                    2 Comments </h3>
+                    {{commentList.length}} Comments </h3>
 
                 <div id="respond" class="comment-respond">
                     <h2 id="reply-title" class="comment-reply-title">Leave a Reply<span class="ct-cancel-reply"><a
                                 rel="nofollow" id="cancel-comment-reply-link"
                                 href="/the-raja-saab-2026-hindi-hq-hdtc-1080p/#respond" style="display:none;">Cancel
                                 Reply</a></span></h2>
-                    <form action="https://movies4u.pk/wp-comments-post.php" method="post" id="commentform"
+                    <form [formGroup]="commentFormGroup" (ngSubmit)="submitComment()"  id="commentform"
                         class="comment-form  has-labels-outside">
-                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span>
+                        <p class="comment-notes">
                             <span class="required-field-message">Required fields are marked <span
                                     class="required">*</span></span>
                         </p>
                         <p class="comment-form-field-input-author">
                             <label for="author">Name </label>
-                            <input id="author" name="author" type="text" value="" size="30">
+                            <input id="author" name="author" type="text" formControlName="name" >
                         </p>
 
 
                         <p class="comment-form-field-textarea">
                             <label for="comment">Add Comment<b class="required">&nbsp;*</b></label>
-                            <textarea id="comment" name="comment" cols="45" rows="8" required="required"></textarea>
+                            <textarea formControlName="comment" id="comment" name="comment" cols="45" rows="8" required="required" ></textarea>
                         </p>
-                        <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent"
-                                name="wp-comment-cookies-consent" type="checkbox" value="yes"><label
-                                for="wp-comment-cookies-consent">Save my name and email in this browser for the next
-                                time I comment.</label></p>
+                        
                         <p class="form-submit"><button type="submit" name="submit" id="submit" class="submit"
-                                value="Post Comment">Post Comment</button> <input type="hidden" name="comment_post_ID"
-                                value="46952" id="comment_post_ID">
-                            <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                                value="Post Comment" (keydown.enter)="submitComment()">Post Comment</button> 
                         </p>
                     </form>
                 </div><!-- #respond -->
 
                 <ol class="ct-comment-list">
 
-                    <li id="comment-5179" class="comment even thread-even depth-1 ct-has-avatar">
+                    <li *ngFor="let comments of commentList" id="comment-5179" class="comment even thread-even depth-1 ct-has-avatar">
                         <article class="ct-comment-inner" id="ct-comment-inner-5179" itemprop="comment" itemscope=""
-                            itemtype="https://schema.org/Comment">
+                            >
 
                             <footer class="ct-comment-meta">
-                                <figure class="ct-media-container"><img decoding="async"
-                                        src="https://movies4u.pk/wp-content/uploads/gravatars/avatar" width="100"
-                                        height="100" alt="Ankit Singh" style="aspect-ratio: 1/1;"></figure>
-                                <h4 class="ct-comment-author" itemprop="author" itemscope=""
-                                    itemtype="https://schema.org/Person">
-                                    <cite itemprop="name">Ankit Singh</cite>
+                
+                                <h4 class="ct-comment-author" itemprop="author" itemscope="">
+                                    <cite itemprop="name">{{comments.name}}</cite>
                                 </h4>
 
                                 <div class="ct-comment-meta-data">
-                                    <a href="https://movies4u.pk/the-raja-saab-2026-hindi-hq-hdtc-1080p/#comment-5179"><time
-                                            datetime="2026-01-10T04:03:46+05:30" itemprop="datePublished">January 10,
-                                            2026 / 4:03 am</time></a>
+                                    <p>{{comments.createdAt | date:'medium'}}</p>
 
-                                    <a rel="nofollow" class="comment-reply-link" href="#comment-5179"
+                                    <!-- <a rel="nofollow" class="comment-reply-link" href="#comment-5179"
                                         data-commentid="5179" data-postid="46952"
                                         data-belowelement="ct-comment-inner-5179" data-respondelement="respond"
-                                        data-replyto="Reply to Ankit Singh" aria-label="Reply to Ankit Singh">Reply</a>
+                                        data-replyto="Reply to Ankit Singh" aria-label="Reply to Ankit Singh">Reply</a> -->
                                 </div>
                             </footer>
 
 
                             <div class="ct-comment-content entry-content is-layout-flow" itemprop="text">
-                                <p>Best</p>
-
-                            </div>
-
-                        </article>
-                    </li>
-                    <li id="comment-5194" class="comment odd alt thread-odd thread-alt depth-1 ct-has-avatar">
-                        <article class="ct-comment-inner" id="ct-comment-inner-5194" itemprop="comment" itemscope=""
-                            itemtype="https://schema.org/Comment">
-
-                            <footer class="ct-comment-meta">
-                                <figure class="ct-media-container"><img decoding="async"
-                                        src="https://movies4u.pk/wp-content/uploads/gravatars/avatar" width="100"
-                                        height="100" alt="Raja saab" style="aspect-ratio: 1/1;"></figure>
-                                <h4 class="ct-comment-author" itemprop="author" itemscope=""
-                                    itemtype="https://schema.org/Person">
-                                    <cite itemprop="name">Raja saab</cite>
-                                </h4>
-
-                                <div class="ct-comment-meta-data">
-                                    <a href="https://movies4u.pk/the-raja-saab-2026-hindi-hq-hdtc-1080p/#comment-5194"><time
-                                            datetime="2026-01-11T15:54:36+05:30" itemprop="datePublished">January 11,
-                                            2026 / 3:54 pm</time></a>
-
-                                    <a rel="nofollow" class="comment-reply-link" href="#comment-5194"
-                                        data-commentid="5194" data-postid="46952"
-                                        data-belowelement="ct-comment-inner-5194" data-respondelement="respond"
-                                        data-replyto="Reply to Raja saab" aria-label="Reply to Raja saab">Reply</a>
-                                </div>
-                            </footer>
-
-
-                            <div class="ct-comment-content entry-content is-layout-flow" itemprop="text">
-                                <p>Rajasaab</p>
+                                <p>{{comments.comment}}</p>
 
                             </div>
 

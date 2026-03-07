@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Movie } from '../Services/movie';// Ensure correct path
 import { environment } from '../../environments/environment';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Moviez } from '../Models/Moviez';
 import { PageResponse } from '../Models/PageResponse';
 
@@ -24,14 +24,21 @@ export class DownloadPageComponent implements OnInit {
   categories:any[]=[];
   categoryMovieList:any[]=[];
   categorySelected:boolean=false;
+  commentFormGroup:any;
+  commentList:any[]=[];
 
   constructor(private route: ActivatedRoute,
     private movieService: Movie,
     private fb:FormBuilder,
     private router:Router
-    ) { 
+    ) {
       this.searchFormGroup=this.fb.group({
         search:['']
+      }),
+      this.commentFormGroup=this.fb.group({
+        name:['', Validators.required],
+        comment:['', Validators.required],
+        movieId:['']
       })
     }
 
@@ -52,6 +59,8 @@ export class DownloadPageComponent implements OnInit {
     this.movieService.getMovieById(id).subscribe({
       next: (data: any) => {
         this.movie = data;
+        this.movieId = id;
+        this.getComments(id);
         // Scroll to the top of the page when a new movie loads
         window.scrollTo(0, 0);
       },
@@ -128,5 +137,51 @@ export class DownloadPageComponent implements OnInit {
       }
     })
   }
+
+  initializeForm(){
+    this.commentFormGroup.reset();
+  }
+  submitComment() {
+    if(this.commentFormGroup.invalid){
+      alert("Please fill in all required fields");
+      return;
+    }
+    
+    const formValue = this.commentFormGroup.value;
+    const commentData={
+      name:formValue.name,
+      comment:formValue.comment,
+      movieId:this.movieId
+    };
+
+    const formData=new FormData();
+
+    formData.append('comment',new Blob([JSON.stringify(commentData)],{ type: 'application/json' }))
+    this.movieService.postComment(formData).subscribe({
+      next:()=>{
+        // alert("Commented Successfully")
+        console.log("Comment saved Succesfully")
+        this.initializeForm();
+        this.getComments(this.movieId);
+      },
+      error:(err:any)=>{
+        console.error("Error While Saving ",err);
+      }
+    })
+  }
+
+  getComments(movieId:any){
+    this.movieService.getCommentsByMovieId(movieId).subscribe({
+      next:(data:any)=>{
+        this.commentList=data;
+        console.log("successfully saved Comment in variable");
+      },
+      error:(err:any)=> {
+        console.error("error while fetching the comments",err);
+      }
+    })
+  }
+
+
 
 }
