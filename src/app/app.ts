@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Movie } from './Services/movie';
 import { Moviez } from './Models/Moviez';
 import { CommonModule } from '@angular/common';
+import { PageResponse } from './Models/PageResponse';
 
 @Component({
   selector: 'app-root',
@@ -71,9 +72,9 @@ export class App {
     });
 
     this.movieService.searchMovie(undefined, category).subscribe({
-      next: (data: Moviez[]) => {
+      next: (data: PageResponse<Moviez>) => {
         console.log('Search results:', data);
-        this.moviesList = data; // Update the UI list
+        this.moviesList = data.content; // Update the UI list
       },
       error: (err: any) => {
         console.error('Error searching movie:', err);
@@ -106,9 +107,9 @@ export class App {
 
     //call the service
     this.movieService.searchMovie(formValue.search).subscribe({
-      next: (data: Moviez[]) => {
+      next: (data: PageResponse<Moviez>) => {
         console.log('Search results:', data);
-        this.moviesList = data; // Update the UI list
+        this.moviesList = data.content; // Update the UI list
       },
       error: (err: any) => {
         console.error('Error searching movie:', err);
